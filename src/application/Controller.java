@@ -1,5 +1,8 @@
 package application;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 public class Controller {
 
 	//******** Encode *****************************************
@@ -52,17 +55,28 @@ public class Controller {
 	public static String decode(String txt) {
 		StringBuffer sb = new StringBuffer();
 		
-		String[] parts = txt.split(",");
-		
-		for(int index = 0; index < parts.length; index++) {
-			char character = parts[index].charAt(0);
-			Integer number = Integer.parseInt(parts[index].substring(1));
+		try {
+			String[] parts = txt.split(",");
 			
-			for(int i = 0; i < number; i++) {
-				sb.append(character);
+			for(int index = 0; index < parts.length; index++) {
+				char character = parts[index].charAt(0);
+				Integer number = Integer.parseInt(parts[index].substring(1));
+				
+				for(int i = 0; i < number; i++) {
+					sb.append(character);
+				}
 			}
+			
+			return sb.toString();
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Błąd!");
+			alert.setHeaderText(null);
+			alert.setContentText("Błędny format danych wejściowych!");
+			alert.showAndWait();
+			
+			//e.printStackTrace();
+			return null;
 		}
-		
-		return sb.toString();
 	}
 }

@@ -31,8 +31,8 @@ public class Main extends Application {
 			sourceTextField.setLayoutY(70);
 			sourceTextField.getStyleClass().add("textField");
 			
-			Button copyButton = new Button("Kopiuj");
-			copyButton.setLayoutX(150);
+			Button copyButton = new Button("Kopiuj wynik do źródła");
+			copyButton.setLayoutX(80);
 			copyButton.setLayoutY(135);
 			copyButton.getStyleClass().add("button");
 			
@@ -46,8 +46,8 @@ public class Main extends Application {
 			resultTextField.setLayoutY(240);
 			resultTextField.getStyleClass().add("textField");
 			
-			Button executeButton = new Button("Wykonaj");
-			executeButton.setLayoutX(150);
+			Button executeButton = new Button("Koduj");
+			executeButton.setLayoutX(80);
 			executeButton.setLayoutY(305);
 			executeButton.getStyleClass().add("button");
 			
@@ -58,11 +58,13 @@ public class Main extends Application {
 			
 			RadioButton encodingRB = new RadioButton("kodowanie");
 			encodingRB.setSelected(true);
+			encodingRB.setUserData("Koduj");
 			encodingRB.setLayoutX(500);
 			encodingRB.setLayoutY(160);
 			encodingRB.getStyleClass().add("radioButton");
 			
 			RadioButton decodingRB = new RadioButton("dekodowanie");
+			decodingRB.setUserData("Dekoduj");
 			decodingRB.setLayoutX(500);
 			decodingRB.setLayoutY(190);
 			decodingRB.getStyleClass().add("radioButton");
@@ -73,19 +75,24 @@ public class Main extends Application {
 			
 			root.getChildren().addAll(sourceLabel, sourceTextField, copyButton, resultLabel, resultTextField, executeButton, choiceLabel, encodingRB, decodingRB);
 			
+			//=========== Radio Button Listener ========================
+			toggleGroup.selectedToggleProperty().addListener((ov,oldToggle,newToggle) -> {
+				executeButton.setText(newToggle.getUserData().toString());
+			});
+			
 			//=========== Execute Button Listener ========================
 			executeButton.setOnAction(event -> {
 				if(encodingRB.isSelected()) { // jężeli encode
 					if(!sourceTextField.getText().isEmpty()) {
 						resultTextField.setText(Controller.encode(sourceTextField.getText()));
-						//sourceTextField.setText(null);
+						sourceTextField.setText(null);
 					} 
 				}
 				
 				if(decodingRB.isSelected()) { //jeżeli decode
 					if(!sourceTextField.getText().isEmpty()) {
 						resultTextField.setText(Controller.decode(sourceTextField.getText()));
-						//sourceTextField.setText(null);
+						sourceTextField.setText(null);
 					}
 				}
 			});
@@ -93,7 +100,7 @@ public class Main extends Application {
 			//=========== Copy Button Listener ========================
 			copyButton.setOnAction(event -> {
 				sourceTextField.setText(resultTextField.getText());
-				//resultTextField.setText(null);
+				resultTextField.setText(null);
 			});
 			
 			

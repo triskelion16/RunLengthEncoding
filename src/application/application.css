@@ -13,7 +13,7 @@
 .button {
 	-fx-background-color: rgb(200,200,200);
 	-fx-font: bold 14pt 'shefif';
-	-fx-pref-width: 150px;
+	-fx-pref-width: 300px;
 }
 
 .button:hover {
