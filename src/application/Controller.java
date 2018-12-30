@@ -41,7 +41,7 @@ public class Controller {
 			}
 
 		} else {
-			str = "" + current + count;
+			str = "" + current + count + separator;
 			sb.append(str);
 		}
 
@@ -50,7 +50,19 @@ public class Controller {
 
 	//******** Decode *****************************************
 	public static String decode(String txt) {
-
-		return null;
+		StringBuffer sb = new StringBuffer();
+		
+		String[] parts = txt.split(",");
+		
+		for(int index = 0; index < parts.length; index++) {
+			char character = parts[index].charAt(0);
+			Integer number = Integer.parseInt(parts[index].substring(1));
+			
+			for(int i = 0; i < number; i++) {
+				sb.append(character);
+			}
+		}
+		
+		return sb.toString();
 	}
 }

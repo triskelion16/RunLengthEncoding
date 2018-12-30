@@ -73,11 +73,27 @@ public class Main extends Application {
 			
 			root.getChildren().addAll(sourceLabel, sourceTextField, copyButton, resultLabel, resultTextField, executeButton, choiceLabel, encodingRB, decodingRB);
 			
+			//=========== Execute Button Listener ========================
 			executeButton.setOnAction(event -> {
-				if(sourceTextField.getText() != null) {
-					resultTextField.setText(Controller.encode(sourceTextField.getText()));
-					sourceTextField.setText(null);
-				} 
+				if(encodingRB.isSelected()) { // jężeli encode
+					if(!sourceTextField.getText().isEmpty()) {
+						resultTextField.setText(Controller.encode(sourceTextField.getText()));
+						//sourceTextField.setText(null);
+					} 
+				}
+				
+				if(decodingRB.isSelected()) { //jeżeli decode
+					if(!sourceTextField.getText().isEmpty()) {
+						resultTextField.setText(Controller.decode(sourceTextField.getText()));
+						//sourceTextField.setText(null);
+					}
+				}
+			});
+			
+			//=========== Copy Button Listener ========================
+			copyButton.setOnAction(event -> {
+				sourceTextField.setText(resultTextField.getText());
+				//resultTextField.setText(null);
 			});
 			
 			
