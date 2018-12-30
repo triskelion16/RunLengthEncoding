@@ -1,1 +1,26 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.label {
+	-fx-font: bold 14pt 'sherif';
+	-fx-text-fill: white;
+}
+
+.textField {
+	-fx-pref-width: 400px;
+	-fx-font: normal 12pt 'sherif';
+}
+
+.button {
+	-fx-background-color: rgb(200,200,200);
+	-fx-font: bold 14pt 'shefif';
+	-fx-pref-width: 150px;
+}
+
+.button:hover {
+	-fx-background-color: rgb(240,240,240);
+}
+
+.radioButton {
+	-fx-text-fill: white;
+	-fx-font: bold 12pt 'sherif';
+}
